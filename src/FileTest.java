@@ -6,9 +6,9 @@ import java.util.NoSuchElementException;
 import org.junit.Test;
 
 
-public class FileFormesTest {
+public class FileTest {
 	
-	private void remplirFile(FileFormes file)
+	private void remplirFile(File<Forme> file)
 	{
 		assertEquals(0, file.getSize());
 		for(int i = 0; i < 10; i++)
@@ -21,7 +21,7 @@ public class FileFormesTest {
 	
 	@Test
 	public void testAjouter() {
-		FileFormes file = new FileFormes();
+		File<Forme> file = new File<Forme>();
 		remplirFile(file);
 
 		file.ajouter(new Rectangle(11, 110, 110, 110, 110));
@@ -30,7 +30,7 @@ public class FileFormesTest {
 	
 	@Test(expected = NoSuchElementException.class)
 	public void testRetirerVide() {
-		FileFormes file = new FileFormes();
+		File<Forme> file = new File<Forme>();
 		assertEquals(0, file.getSize());
 	
 		file.retirer();
@@ -39,7 +39,7 @@ public class FileFormesTest {
 	@Test
 	public void testRetirerUnique()
 	{
-		FileFormes file = new FileFormes();
+		File<Forme> file = new File<Forme>();
 		
 		file.ajouter(new Rectangle(0,10,10,10,10));
 		
@@ -50,7 +50,7 @@ public class FileFormesTest {
 	@Test
 	public void testRetirerPleine()
 	{
-		FileFormes file = new FileFormes();
+		File<Forme> file = new File<Forme>();
 		
 		remplirFile(file);
 		file.retirer();
@@ -60,7 +60,7 @@ public class FileFormesTest {
 	@Test 
 	public void testIterator()
 	{
-		FileFormes file = new FileFormes();
+		File<Forme> file = new File<Forme>();
 		remplirFile(file);
 		int i = 0;
 		for(Forme f : file)
@@ -75,7 +75,7 @@ public class FileFormesTest {
 	@Test(expected = NoSuchElementException.class)
 	public void testIteratorVide()
 	{
-		FileFormes file = new FileFormes();
+		File<Forme> file = new File<Forme>();
 		
 		Iterator<Forme> iter = file.iterator();
 		
