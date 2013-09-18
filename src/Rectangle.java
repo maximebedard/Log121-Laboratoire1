@@ -2,14 +2,14 @@
 Cours:  LOG121
 Projet: laboratoire #1
 Nom du fichier: Rectangle.java
-Date créé: 2013-09-12
+Date crÃ©Ã©: 2013-09-12
 *******************************************************
 Historique des modifications
 *******************************************************
 *@author Patrice Boucher
 2013-09-12 Version initiale
 
-*@author Nicolas Jiménez-Dumont
+*@author Nicolas JimÃ©nez-Dumont
 2013-09-17 Ajout de la variable couleur - modification dessiner()
 *******************************************************/  
 
@@ -32,7 +32,8 @@ public class Rectangle extends Forme {
 	}
 
 	public Rectangle(int noSeq, int x, int y, int largeur, int longueur) {
-		super(noSeq, x, y, Color.MAGENTA);
+		super(noSeq, x, y);
+        setCouleur(Color.MAGENTA);
 		this.largeur = largeur;
 		this.longueur = longueur;
 	}

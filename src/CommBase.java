@@ -30,7 +30,7 @@ public class CommBase {
 	}
 	
 	/**
-	 * DÈfinir le rÈcepteur de l'information reÁue dans la communication avec le serveur
+	 * D√©finir le r√©cepteur de l'information re√©ue dans la communication avec le serveur
 	 * @param listener sera alert√© lors de l'appel de "firePropertyChanger" par le SwingWorker
 	 */
 	public void setPropertyChangeListener(PropertyChangeListener listener){

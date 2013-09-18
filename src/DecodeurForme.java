@@ -43,11 +43,11 @@ public class DecodeurForme
 	
 	private static TypeForme parseTypeForme(String input)
 	{
-        String tag = getFormeXml(input);
+        String tag = findFormeXml(input);
 		return TypeForme.valueOf(tag.substring(tag.indexOf("<") + 1, tag.indexOf(">")));
 	}
 
-    private static String getFormeXml(String input)
+    private static String findFormeXml(String input)
     {
         Matcher m = tagPattern.matcher(input);
         m.find();
@@ -59,7 +59,7 @@ public class DecodeurForme
 		String begin = "<" + type.toString() + ">";
 		String end = "</" + type.toString() + ">";
 
-        String tag = getFormeXml(input);
+        String tag = findFormeXml(input);
         String data = tag.substring(begin.length(), tag.length() - end.length());
 
 		String[] cStrs = data.split(" ");

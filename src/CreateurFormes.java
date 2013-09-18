@@ -1,19 +1,19 @@
 
-public final class CreateurFormes 
+public final class CreateurFormes
 {
 
 	/**
-     * Crée une nouvelle forme. Cette méthode reçoit la chaîne de
-     * caractères provenant du serveur de formes, elle détermine de quelle
-     * forme il s'agit et applique l'opérateur new sur le constructeur de
-     * la forme désirée.
+     * CrÃ©e une nouvelle forme. Cette mÃ©thode reÃ§oit la chaÃ®ne de
+     * caractÃ©res provenant du serveur de formes, elle dÃ©termine de quelle
+     * forme il s'agit et applique l'opÃ©rateur new sur le constructeur de
+     * la forme dÃ©sirÃ©e.
      *
-     * @param chaineForme un objet String contenant la chaîne de caractères
-     *                    qui décrit une forme et provenant du serveur de
+     * @param chaineForme un objet String contenant la chaÃ®ne de caractÃ©res
+     *                    qui dÃ©crit une forme et provenant du serveur de
      *                    formes.
      *
      * @return une instance d'une des sous-classes de la classe abstraite
-     *         Forme avec les paramètres passés par la chaîne d'entrée.
+     *         Forme avec les paramÃ©tres passÃ©s par la chaÃ®ne d'entrÃ©e.
      */
     public static Forme creerForme(String chaineForme) 
     {

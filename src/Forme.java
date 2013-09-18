@@ -2,30 +2,34 @@
 Cours:  LOG121
 Projet: laboratoire #1
 Nom du fichier: Forme.java
-Date crÈÈ: 2013-09-12
+Date cr√©√©: 2013-09-12
 *******************************************************
 Historique des modifications
 *******************************************************
 *@author Patrice Boucher
 2013-09-12 Version initiale
 
-*@author Nicolas JimÈnez-Dumont
+*@author Nicolas Jim√©nez-Dumont
 2013-09-17 Ajout de la variable couleur
+
+*@author Maxime B√©dard
+2013-09-18 Modification de l'application de la couleur
+           Ajout de la JavaDoc
 *******************************************************/  
 
 import java.awt.Graphics;
 import java.awt.Color;
 
 /**
- * Classe abstraite qui dÈfinit les attributs et les mÈthodes partagÈs entre
- * les diffÈrentes formes
+ * Classe abstraite qui d√©finit les attributs et les m√©thodes partag√©s entre
+ * les diff√©rentes formes
  * 
- * @author Maxime BÈdard
+ * @author Maxime B√©dard
  */
 public abstract class Forme {
 	
 	/**
-	 * NumÈro sÈquentiel unique obtenu lors de la crÈation de la forme
+	 * Num√©ro s√©quentiel unique obtenu lors de la cr√©ation de la forme
 	 */
 	private int noSeq;
 	private int x;
@@ -33,9 +37,9 @@ public abstract class Forme {
 	private Color couleur;
 	
 	/**
-	 * Retourne le numÈro sÈquentiel obtenu lors de la crÈation 
+	 * Retourne le num√©ro s√©quentiel obtenu lors de la cr√©ation 
 	 * de la forme.
-	 * @return le numÈro sÈquentiel unique
+	 * @return le num√©ro s√©quentiel unique
 	 */
 	public int getNoSeq()
 	{
@@ -88,7 +92,7 @@ public abstract class Forme {
 	}
 	
 	/**
-	 * Assigne la couleur utilisÈ lorsque la forme est dessinÈ
+	 * Assigne la couleur utilis√© lorsque la forme est dessin√©
 	 * @param couleur Couleur de la forme
 	 */
 	public void setCouleur(Color couleur)
@@ -98,22 +102,28 @@ public abstract class Forme {
 	
 	
 	/**
-	 * Construit une nouvelle forme a partir d'un numÈro sÈquentiel ainsi
-	 * ainsi que ses coordonnÈes (x,y)		
-	 * 
-	 * @param noSeq NumÈro sÈquentielle unique obtenu lors des Èchanges avec 
+	 * Construit une nouvelle forme a partir d'un num√©ro s√©quentiel ainsi
+	 * ainsi que ses coordonn√©es (x,y). Lors de la cr√©ation d'une forme, la
+     * couleur Color.BLACK est initialis√© par d√©faut.
+	 * @param noSeq Num√©ro s√©quentielle unique obtenu lors des √©changes avec 
 	 * 			    le serveur.
 	 * @param x Position initiale de la forme en X sur le canevas
 	 * @param y Position initiale de la forme en Y sur le canevas
 	 */
-	public Forme(int noSeq, int x, int y, Color couleur)
+	public Forme(int noSeq, int x, int y)
 	{
 		this.noSeq = noSeq;
 		this.x = x;
 		this.y = y;
-		this.couleur = couleur;
+		this.couleur = Color.BLACK;
 	}
-	
+
+    /**
+     * Dessine la forme sur le canevas en appelant la fonction dessinerForme
+     * des classes qui h√©ritent de Forme. Cette fonction applique la couleur
+     * avant de dessiner la forme.
+     * @param g Context graphique sur lequel dessiner la forme
+     */
 	public void dessiner(Graphics g)
 	{
 		g.setColor(couleur);
@@ -122,6 +132,7 @@ public abstract class Forme {
 	
 	/**
 	 * Dessine la forme sur le canevas
+     * @param g Context graphique sur lequel dessiner la forme
 	 */
 	protected abstract void dessinerForme(Graphics g);
 	

@@ -2,11 +2,11 @@
 Cours:  LOG121
 Projet: Laboratoire #1
 Nom du fichier: TableauFormes.java
-Date créé: 2013-09-17
+Date crÃ©Ã©: 2013-09-17
  *******************************************************
 Historique des modifications
  *******************************************************
- *@author Nicolas Jiménez-Dumont
+ *@author Nicolas JimÃ©nez-Dumont
 2013-09-17 Version initiale
  *******************************************************/
 
@@ -20,14 +20,14 @@ public class TableauFormes {
 	private Forme[] tabFormes;
 
 	/**
-	 * Itterateur indiquant à quelle position du tableau les formes doivent être
-	 * ajouté
+	 * Itterateur indiquant Ã© quelle position du tableau les formes doivent Ã©tre
+	 * ajoutÃ©
 	 * */
 	private int itterateurFin;
 
 	/**
-	 * Itterateur indiquant à quelle position du tableau les formes doivent être
-	 * enlevé
+	 * Itterateur indiquant Ã© quelle position du tableau les formes doivent Ã©tre
+	 * enlevÃ©
 	 * */
 	private int itterateurDebut;
 
@@ -47,7 +47,7 @@ public class TableauFormes {
 
 	/**
 	 * Constructeur: la taille du tableau est toujours = 10. Tous les autres
-	 * varables sont initialisé à 0
+	 * varables sont initialisÃ© Ã© 0
 	 */
 	public TableauFormes() {
 		tabFormes = new Forme[10];
@@ -57,42 +57,41 @@ public class TableauFormes {
 	}
 
 	/**
-	 * Ajoute au tableau une nouvelle forme, le nombre de forme mémorisé
-	 * n'excédera pas 10
+	 * Ajoute au tableau une nouvelle forme, le nombre de forme mÃ©morisÃ©
+	 * n'excÃ©dera pas 10
 	 * 
-	 * @param Objet
-	 *            de type Forme
+	 * @param valForme Forme Ã  ajouter
 	 */
 	public void ajouter(Forme valForme) {
 		tabFormes[itterateurFin] = valForme;
 
-		// ajuste les variable local aux changements apporté au tableau
+		// ajuste les variable local aux changements apportÃ© au tableau
 		incrementeNbElements();
 		incrementeItterateurFin();
 	}
 
 	/**
-	 * Obtient la forme la plus ancienne ajouté au tableau de formes
+	 * Obtient la forme la plus ancienne ajoutÃ© au tableau de formes
 	 * 
 	 * @return objet de type Forme
 	 */
 	public Forme retirer() {
 
 		if (nbElements > 0) {
-			// ajuste les variable local aux changements apporté au tableau
+			// ajuste les variable local aux changements apportÃ© au tableau
 			decrementeNbElements();
 			incrementeItterateurDebut();
 
 			return tabFormes[itterateurDebut];
 		} else {
-			// exception lancé si il n'y a aucune forme à retourner
+			// exception lancÃ© si il n'y a aucune forme Ã© retourner
 			throw new NoSuchElementException();
 		}
 
 	}
 
 	/**
-	 * Incremente l'ittérateur en boucle pour qu'il ne dépasse pas 9
+	 * Incremente l'ittÃ©rateur en boucle pour qu'il ne dÃ©passe pas 9
 	 */
 	private void incrementeItterateurFin() {
 		itterateurFin++;
@@ -100,7 +99,7 @@ public class TableauFormes {
 	}
 
 	/**
-	 * Incremente l'ittérateur en boucle pour qu'il ne dépasse pas 9
+	 * Incremente l'ittÃ©rateur en boucle pour qu'il ne dÃ©passe pas 9
 	 */
 	private void incrementeItterateurDebut() {
 		itterateurDebut++;
@@ -108,7 +107,7 @@ public class TableauFormes {
 	}
 
 	/**
-	 * Incremente le nombre d'éléments en boucle pour qu'il ne dépasse pas 10
+	 * Incremente le nombre d'Ã©lÃ©ments en boucle pour qu'il ne dÃ©passe pas 10
 	 */
 	private void incrementeNbElements() {
 		nbElements++;
@@ -116,7 +115,7 @@ public class TableauFormes {
 	}
 
 	/**
-	 * Incremente le nombre d'éléments en boucle pour qu'il ne soit pas sous 0
+	 * Incremente le nombre d'Ã©lÃ©ments en boucle pour qu'il ne soit pas sous 0
 	 */
 	private void decrementeNbElements() {
 		nbElements--;

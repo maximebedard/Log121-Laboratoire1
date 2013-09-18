@@ -2,11 +2,11 @@
 Cours:  LOG121
 Projet: Laboratoire #1
 Nom du fichier: Carre.java
-Date créé: 2013-09-17
+Date crÃ©Ã©: 2013-09-17
 *******************************************************
 Historique des modifications
 *******************************************************
-*@author Nicolas Jiménez-Dumont
+*@author Nicolas JimÃ©nez-Dumont
 2013-09-17 Version initiale
 *******************************************************/  
 import java.awt.Color;

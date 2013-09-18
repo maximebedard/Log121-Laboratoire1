@@ -39,7 +39,7 @@ public class LangueConfig {
 	      catch(java.util.MissingResourceException ex) {
 	         System.err.println("ERROR: cannot find properties file for " + BUNDLE_BASENAME);
 	      }
-	   };
+	   }
 	   
 	   /**
 	    * Retourne un mot (dans la langue de l'application) lié à un champs
