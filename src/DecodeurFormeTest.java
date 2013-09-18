@@ -9,13 +9,13 @@ public class DecodeurFormeTest {
 
 	@Test(expected = InvalidFormatException.class)
 	public void formatInvalideTest()  {
-		DecodeurForme d = new DecodeurForme("<Carre>0 0 1</Carre>");
+		new DecodeurForme("<Carre>0 0 1</Carre>");
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void formeInvalideTest() 
 	{
-		DecodeurForme d = new DecodeurForme("1 <SPHERE>0 0 1 1</SPHERE>");
+		new DecodeurForme("1 <SPHERE>0 0 1 1</SPHERE>");
 	}
 	
 	@Test

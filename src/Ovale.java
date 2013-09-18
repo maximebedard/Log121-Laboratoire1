@@ -24,15 +24,13 @@ public class Ovale extends Forme {
 	private int longueur;
 
 	public Ovale(int noSeq, int x, int y, int largeur, int longueur) {
-		super(noSeq, x, y);
+		super(noSeq, x, y, Color.GREEN);
 		this.largeur = largeur;
 		this.longueur = longueur;
-		couleur = Color.GREEN;
 	}
 
 	@Override
-	public void dessiner(Graphics g) {
-		g.setColor(couleur);
+	protected void dessinerForme(Graphics g) {
 		g.fillOval(getX(), getY(), largeur, longueur);
 	}
 

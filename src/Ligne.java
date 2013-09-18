@@ -23,15 +23,13 @@ public class Ligne extends Forme {
 	private int y2;
 	
 	public Ligne(int noSeq, int x, int y, int x2, int y2) {
-		super(noSeq, x, y);
+		super(noSeq, x, y, Color.YELLOW);
 		this.x2 = x2;
 		this.y2 = y2;
-		couleur = Color.YELLOW;
 	}
 
 	@Override
-	public void dessiner(Graphics g) {
-		g.setColor(couleur);
+	protected void dessinerForme(Graphics g) {
 		g.drawLine(getX(), getY(), x2, y2);
 		
 	}

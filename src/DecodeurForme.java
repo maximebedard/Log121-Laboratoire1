@@ -2,10 +2,6 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import sun.io.Converters;
-
-import com.sun.media.sound.InvalidFormatException;
-import com.sun.xml.internal.bind.v2.runtime.Coordinator;
 
 public class DecodeurForme 
 {
@@ -31,7 +27,7 @@ public class DecodeurForme
 	private static final String validRegex = "\\d <(.*)>(.*)</\\1>";
 	private static final String tagRegex = "<(.*)>(.*)</\\1>";
 	
-	private static final Pattern validPattern = Pattern.compile(validRegex);
+	//private static final Pattern validPattern = Pattern.compile(validRegex);
 	private static final Pattern tagPattern = Pattern.compile(tagRegex);
 	
 	

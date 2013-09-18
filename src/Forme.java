@@ -30,7 +30,7 @@ public abstract class Forme {
 	private int noSeq;
 	private int x;
 	private int y;
-	protected Color couleur;
+	private Color couleur;
 	
 	/**
 	 * Retourne le numéro séquentiel obtenu lors de la création 
@@ -79,23 +79,50 @@ public abstract class Forme {
 	}
 	
 	/**
-	 * @TODO description
+	 * Retourne la couleur de la forme
+	 * @return couleur de la forme
+	 */
+	public Color getCouleur()
+	{
+		return couleur;
+	}
+	
+	/**
+	 * Assigne la couleur utilisé lorsque la forme est dessiné
+	 * @param couleur Couleur de la forme
+	 */
+	public void setCouleur(Color couleur)
+	{
+		this.couleur = couleur;
+	}
+	
+	
+	/**
+	 * Construit une nouvelle forme a partir d'un numéro séquentiel ainsi
+	 * ainsi que ses coordonnées (x,y)		
 	 * 
 	 * @param noSeq Numéro séquentielle unique obtenu lors des échanges avec 
 	 * 			    le serveur.
 	 * @param x Position initiale de la forme en X sur le canevas
 	 * @param y Position initiale de la forme en Y sur le canevas
 	 */
-	public Forme(int noSeq, int x, int y)
+	public Forme(int noSeq, int x, int y, Color couleur)
 	{
 		this.noSeq = noSeq;
 		this.x = x;
 		this.y = y;
+		this.couleur = couleur;
+	}
+	
+	public void dessiner(Graphics g)
+	{
+		g.setColor(couleur);
+		dessinerForme(g);
 	}
 	
 	/**
 	 * Dessine la forme sur le canevas
 	 */
-	public abstract void dessiner(Graphics g);
+	protected abstract void dessinerForme(Graphics g);
 	
 }

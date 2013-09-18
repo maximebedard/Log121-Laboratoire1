@@ -32,15 +32,13 @@ public class Rectangle extends Forme {
 	}
 
 	public Rectangle(int noSeq, int x, int y, int largeur, int longueur) {
-		super(noSeq, x, y);
+		super(noSeq, x, y, Color.MAGENTA);
 		this.largeur = largeur;
 		this.longueur = longueur;
-		couleur = Color.MAGENTA;
 	}
 
 	@Override
-	public void dessiner(Graphics g) {
-		g.setColor(couleur);
+	protected void dessinerForme(Graphics g) {
 		g.fillRect(getX(), getY(), largeur, longueur);
 	}
 

@@ -1,5 +1,3 @@
-import com.sun.media.sound.InvalidFormatException;
-
 
 public final class CreateurFormes 
 {
