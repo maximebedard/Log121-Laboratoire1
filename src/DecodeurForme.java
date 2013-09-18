@@ -43,19 +43,25 @@ public class DecodeurForme
 	
 	private static TypeForme parseTypeForme(String input)
 	{
-		Matcher m = tagPattern.matcher(input);
-		m.find();
-		String tag = m.group(0);
+        String tag = getFormeXml(input);
 		return TypeForme.valueOf(tag.substring(tag.indexOf("<") + 1, tag.indexOf(">")));
 	}
+
+    private static String getFormeXml(String input)
+    {
+        Matcher m = tagPattern.matcher(input);
+        m.find();
+        return m.group(0);
+    }
 	
 	private static int[] parseCoordonnes(String input, TypeForme type)
 	{
 		String begin = "<" + type.toString() + ">";
 		String end = "</" + type.toString() + ">";
-		
-		String data = input.substring(begin.length(), input.length() - end.length());
-		
+
+        String tag = getFormeXml(input);
+        String data = tag.substring(begin.length(), tag.length() - end.length());
+
 		String[] cStrs = data.split(" ");
 		int[] cInts = new int[cStrs.length];
 		for(int i = 0; i < cStrs.length; i++)

@@ -7,7 +7,7 @@ import com.sun.media.sound.InvalidFormatException;
 
 public class DecodeurFormeTest {
 
-	@Test(expected = InvalidFormatException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void formatInvalideTest()  {
 		new DecodeurForme("<Carre>0 0 1</Carre>");
 	}
