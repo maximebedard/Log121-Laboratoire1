@@ -11,11 +11,8 @@ Historique des modifications
 *******************************************************/  
  
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
 /**
- * Cette classe reprÃ©sente l'application dans son ensemble. 
+ * Cette classe représente l'application dans son ensemble. 
  * @author Patrice Boucher
  * @date 2013/05/04
  */
@@ -26,7 +23,7 @@ public class ApplicationFormes{
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ApplicationFormes application = new ApplicationFormes();
+		new ApplicationFormes();
 	}
 	
 	/**

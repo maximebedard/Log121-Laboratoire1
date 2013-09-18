@@ -1,5 +1,20 @@
-import java.awt.Graphics;
+/******************************************************
+Cours:  LOG121
+Projet: laboratoire #1
+Nom du fichier: Forme.java
+Date créé: 2013-09-12
+*******************************************************
+Historique des modifications
+*******************************************************
+*@author Patrice Boucher
+2013-09-12 Version initiale
 
+*@author Nicolas Jiménez-Dumont
+2013-09-17 Ajout de la variable couleur
+*******************************************************/  
+
+import java.awt.Graphics;
+import java.awt.Color;
 
 /**
  * Classe abstraite qui définit les attributs et les méthodes partagés entre
@@ -15,6 +30,7 @@ public abstract class Forme {
 	private int noSeq;
 	private int x;
 	private int y;
+	protected Color couleur;
 	
 	/**
 	 * Retourne le numéro séquentiel obtenu lors de la création 
