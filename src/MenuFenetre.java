@@ -56,7 +56,7 @@ public class MenuFenetre extends JMenuBar{
 		addMenuAide();
 	}
 
-	/**
+    /**
 	 *  Créer le menu "Draw". 
 	 */
 	protected void addMenuDessiner() {

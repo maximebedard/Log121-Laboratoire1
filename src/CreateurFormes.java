@@ -27,7 +27,7 @@ public final class CreateurFormes
 				f = new Carre(df.getNoSeq(), coords[0], coords[1], coords[2]);
 				break;
 			case CERCLE:
-				//f = new Cercle();
+				f = new Cercle(df.getNoSeq(),coords[0], coords[1], coords[2]);
 				break;
 			case LIGNE:
 				f = new Ligne(df.getNoSeq(), coords[0], coords[1], coords[2], coords[3]);
@@ -40,7 +40,6 @@ public final class CreateurFormes
 				break;
 			default:
 				break;
-			
 			}
     	
 			return f;
