@@ -32,8 +32,20 @@ public abstract class Forme {
 	 * Numéro séquentiel unique obtenu lors de la création de la forme
 	 */
 	private int noSeq;
+
+    /**
+     * Position en X
+     */
 	private int x;
+
+    /**
+     * Position en Y
+     */
 	private int y;
+
+    /**
+     * Couleur de la forme
+     */
 	private Color couleur;
 	
 	/**
@@ -128,6 +140,7 @@ public abstract class Forme {
 	{
 		g.setColor(couleur);
 		dessinerForme(g);
+
 	}
 	
 	/**

@@ -22,20 +22,37 @@ import javax.swing.*;
  * Base d'une communication via un fil d'exécution parallèle.
  */
 public class CommBase {
-	
-	private final int DELAI = 1000;
-	private SwingWorker threadComm =null;
-	private PropertyChangeListener listener = null;
-	private boolean isActif = false;
-    private Socket socket = null;
-    PrintWriter outStream = null;
-    BufferedReader inStream = null;
 
+    /**
+     * Délais entre les appels au serveur
+     */
+	private final int DELAI = 1000;
+
+    /**
+     * Thread qui communique périodiquement avec le serveur
+     */
+	private SwingWorker<Object, Object> threadComm = null;
+
+    /**
+     * Listener qui envoie les information des formes et les erreurs à la fenêtre principale
+     */
+	private PropertyChangeListener listener = null;
+
+    /**
+     * Boolean qui définit si la connexion est toujours active (utilisé dans les menus)
+     */
+	private boolean isActif = false;
+
+    /**
+     * Encapsulation de la connexion avec le serveur
+     */
+    private ConnectionServeur connexion = new ConnectionServeur();
 
     /**
 	 * Constructeur
 	 */
 	public CommBase(){
+
 	}
 	
 	/**
@@ -49,22 +66,21 @@ public class CommBase {
 	/**
 	 * Démarre la communication
 	 */
-	public void start(){
+	public void start(String address) throws IOException {
+        connexion.connect(address);
         creerCommunication();
     }
 	
 	/**
 	 * Arrête la communication
 	 */
-	public void stop(){
-		if(threadComm!=null)
-			threadComm.cancel(true);
+	public void stop() throws IOException {
+		if(threadComm != null)
+            threadComm.cancel(true);
 
-        if(inStream != null)
-            outStream.println("END");
-
-		isActif = false;
-	}
+        isActif = false;
+        connexion.disconnect();
+    }
 	
 	/**
 	 * Créer le nécessaire pour la communication avec le serveur
@@ -72,55 +88,44 @@ public class CommBase {
 	protected void creerCommunication() {
 
         // Crée un fil d'exécusion parallèle au fil courant,
-		threadComm = new SwingWorker(){
+		threadComm = new SwingWorker<Object, Object>(){
 			@Override
-			protected Object doInBackground() throws Exception {
+			protected Object doInBackground() throws InterruptedException {
 				System.out.println("Le fils d'execution parallele est lance");
 
                 try
                 {
-                    String addr = "localhost:10000";
-                    System.out.println(String.format("Connexion au serveur : %s", addr));
-                    socket = connectToServer(addr);
-
-                    outStream = new PrintWriter(socket.getOutputStream(), true);
-                    inStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-                    while(true)
+                    while(connexion.isConnected())
                     {
                         Thread.sleep(DELAI);
 
-                        outStream.println("GET");
-                        String chaine = inStream.readLine();
-
-                        Forme f = CreateurFormes.creerForme(chaine);
+                        String strForme = connexion.getForme();
 
                         //La méthode suivante alerte l'observateur
-                        if(listener!=null)
-                           firePropertyChange("ENVOIE-TEST", null, (Object) ".");
+                        if(listener != null)
+                            firePropertyChange("FORME", null, strForme);
+
                     }
                 }
-                catch (IOException ex)
+                catch (Exception ex)
                 {
-                    ex.printStackTrace();
+                    if(listener != null)
+                        firePropertyChange("ERREUR", null, ex);
                 }
 
+                isActif = false;
                 return null;
 			}
+
 		};
 		if(listener!=null)
 		   threadComm.addPropertyChangeListener(listener); // La méthode "propertyChange" de ApplicationFormes sera donc appelée lorsque le SwinkWorker invoquera la méthode "firePropertyChanger" 		
 		threadComm.execute(); // Lance le fil d'exécution parallèle.
-		isActif = true;
-	}
-
-    private Socket connectToServer(String addr) throws IOException {
-        String url = addr.substring(0, addr.indexOf(":"));
-        int port = Integer.parseInt(addr.substring(addr.indexOf(":") + 1));
-        return new Socket(url, port);
+        isActif = true;
     }
-	
-	/**
+
+
+    /**
 	 * @return si le fil d'exécution parallèle est actif
 	 */
 	public boolean isActif(){

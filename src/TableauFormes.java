@@ -8,6 +8,9 @@ Historique des modifications
  *******************************************************
  *@author Nicolas Jiménez-Dumont
 2013-09-17 Version initiale
+
+ *@author Nicolas Jiménez-Dumont
+2013-09-19 Changement du fonctionnement g�n�rale pour moins ressembler � une file.
  *******************************************************/
 
 import java.util.NoSuchElementException;
@@ -18,18 +21,6 @@ public class TableauFormes {
 	 * Tableau contenants les formes
 	 * */
 	private Forme[] tabFormes;
-
-	/**
-	 * Itterateur indiquant é quelle position du tableau les formes doivent étre
-	 * ajouté
-	 * */
-	private int itterateurFin;
-
-	/**
-	 * Itterateur indiquant é quelle position du tableau les formes doivent étre
-	 * enlevé
-	 * */
-	private int itterateurDebut;
 
 	/**
 	 * Nombre d'elements actuellement dans le tableau
@@ -51,8 +42,6 @@ public class TableauFormes {
 	 */
 	public TableauFormes() {
 		tabFormes = new Forme[10];
-		itterateurFin = 0;
-		itterateurDebut = 0;
 		nbElements = 0;
 	}
 
@@ -60,14 +49,17 @@ public class TableauFormes {
 	 * Ajoute au tableau une nouvelle forme, le nombre de forme mémorisé
 	 * n'excédera pas 10
 	 * 
-	 * @param valForme Forme à ajouter
+	 * @param valForme
+	 *            Forme à ajouter
 	 */
 	public void ajouter(Forme valForme) {
-		tabFormes[itterateurFin] = valForme;
+		if(nbElements == 10){
+			supprimerForme(0);
+		}
+		tabFormes[nbElements] = valForme;
 
 		// ajuste les variable local aux changements apporté au tableau
 		incrementeNbElements();
-		incrementeItterateurFin();
 	}
 
 	/**
@@ -77,12 +69,9 @@ public class TableauFormes {
 	 */
 	public Forme retirer() {
 
-		if (nbElements > 0) {
-			// ajuste les variable local aux changements apporté au tableau
-			decrementeNbElements();
-			incrementeItterateurDebut();
-
-			return tabFormes[itterateurDebut];
+		if (nbElements > 0) {			
+			supprimerForme(0);
+			return tabFormes[0];
 		} else {
 			// exception lancé si il n'y a aucune forme é retourner
 			throw new NoSuchElementException();
@@ -90,20 +79,23 @@ public class TableauFormes {
 
 	}
 
-	/**
-	 * Incremente l'ittérateur en boucle pour qu'il ne dépasse pas 9
-	 */
-	private void incrementeItterateurFin() {
-		itterateurFin++;
-		itterateurFin = (itterateurFin == 10) ? 0 : itterateurFin;
+	public Forme retirer(int index) {
+		if (index < nbElements) {
+			supprimerForme(index);
+			return tabFormes[index];
+		} else {
+			// exception lancé si il n'y a aucune forme é retourner
+			throw new NoSuchElementException();
+		}
 	}
 
-	/**
-	 * Incremente l'ittérateur en boucle pour qu'il ne dépasse pas 9
-	 */
-	private void incrementeItterateurDebut() {
-		itterateurDebut++;
-		itterateurDebut = (itterateurDebut == 10) ? 0 : itterateurDebut;
+	public Forme getForme(int index) {
+		if (index < nbElements) {
+			return tabFormes[index];
+		} else {
+			// exception lancé si il n'y a aucune forme é retourner
+			throw new NoSuchElementException();
+		}
 	}
 
 	/**
@@ -122,4 +114,13 @@ public class TableauFormes {
 		nbElements = (nbElements < 0) ? 0 : nbElements;
 
 	}
+
+	private void supprimerForme(int index) {
+		decrementeNbElements();
+		if (nbElements > 0) {
+            System.arraycopy(tabFormes, index + 1, tabFormes, index, nbElements - index);
+		}
+
+	}
+
 }

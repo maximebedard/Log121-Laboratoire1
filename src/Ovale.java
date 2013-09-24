@@ -18,10 +18,25 @@ import java.awt.Graphics;
 
 
 public class Ovale extends Forme {
-	
+
+    /**
+     * Largeur de l'ovale
+     */
 	private int largeur;
+
+    /**
+     * Longueur de l'ovale
+     */
 	private int longueur;
 
+    /**
+     * Constructeur de la classe Ovale
+     * @param noSeq
+     * @param x
+     * @param y
+     * @param largeur
+     * @param longueur
+     */
 	public Ovale(int noSeq, int x, int y, int largeur, int longueur) {
 		super(noSeq, x, y);
         setCouleur(Color.GREEN);

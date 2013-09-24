@@ -14,7 +14,6 @@ Historique des modifications
 /**
  * Cette classe représente l'application dans son ensemble.
  * @author Patrice Boucher
- * @date 2013/05/04
  */
 public class ApplicationFormes{
 	
@@ -31,7 +30,6 @@ public class ApplicationFormes{
 	 */
 	public ApplicationFormes(){
 		CommBase comm = new CommBase();
-		FenetrePrincipale fenetre = new FenetrePrincipale(comm);
-		comm.setPropertyChangeListener(fenetre);
+		new FenetrePrincipale(comm);
 	}
 }

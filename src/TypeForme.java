@@ -1,4 +1,7 @@
-public enum TypeForme 
+/**
+ * Type de forme obtenu lors du décodage
+ */
+public enum TypeForme
 {
 	LIGNE,
 	RECTANGLE,

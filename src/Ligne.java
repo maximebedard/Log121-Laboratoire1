@@ -18,10 +18,25 @@ import java.awt.Graphics;
 
 
 public class Ligne extends Forme {
-	
+
+    /**
+     * Position X2
+     */
 	private int x2;
+
+    /**
+     * Position Y2
+     */
 	private int y2;
-	
+
+    /**
+     * Constructeur de la classe ligne
+     * @param noSeq numéro séquentiel
+     * @param x position en x
+     * @param y position en y
+     * @param x2 position en x2
+     * @param y2 position en y2
+     */
 	public Ligne(int noSeq, int x, int y, int x2, int y2) {
 		super(noSeq, x, y);
         setCouleur(Color.YELLOW);

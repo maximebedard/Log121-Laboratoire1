@@ -8,16 +8,18 @@ Historique des modifications
 *******************************************************
 *@author Patrice Boucher
 2013-05-03 Version initiale
-*******************************************************/  
+*******************************************************/
 
+import javax.swing.*;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.IOException;
+import java.net.UnknownHostException;
 
 /**
  * Crée le menu de la fenêtre de l'applicationé
@@ -57,16 +59,70 @@ public class MenuFenetre extends JMenuBar{
 	}
 
     /**
+     * Initialise la connexion avec le serveur
+     */
+    private void startConnection()
+    {
+        try {
+            String addr = JOptionPane.showInputDialog(this, "Quel est le nom d'hôte et le port du serveur de formes?");
+
+            if(addr == null)
+                return;
+
+            comm.start(addr);
+        }
+        catch (UnknownHostException ex){
+            JOptionPaneExtensions.showErrorMessage(this, "Mauvaise spécification de nom de la part de l'usager (erreur DNS)");
+            startConnection();
+        }
+        catch (IOException ex){
+            JOptionPaneExtensions.showErrorMessage(this, "Tentative de connexion à un serveur qui n'est pas démarré.");
+            startConnection();
+        }
+        catch (Exception ex){
+            JOptionPaneExtensions.showErrorMessage(this, "Une erreur imprévue est survenue lors de la connexion au serveur, veuillez essayer de nouveau");
+            startConnection();
+        }
+    }
+
+    /**
+     * Termine la connexion avec le serveur
+     */
+    private void stopConnection()
+    {
+        try {
+            comm.stop();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+
+    /**
 	 *  Créer le menu "Draw". 
 	 */
 	protected void addMenuDessiner() {
 		JMenu menu = creerMenu(MENU_DESSIN_TITRE,new String[] { MENU_DESSIN_DEMARRER, MENU_DESSIN_ARRETER });
+        menu.addMenuListener(new MenuListener() {
+            @Override
+            public void menuSelected(MenuEvent e) {
+                rafraichirMenus();
+            }
+
+            @Override
+            public void menuDeselected(MenuEvent e) {
+            }
+
+            @Override
+            public void menuCanceled(MenuEvent e) {
+            }
+        });
+
 
 		demarrerMenuItem = menu.getItem(0);
 		demarrerMenuItem.addActionListener(new ActionListener(){
 		  public void actionPerformed(ActionEvent arg0) {
-			comm.start();
-			rafraichirMenus();
+              startConnection();
+              rafraichirMenus();
 		  }
 		});
 		demarrerMenuItem.setAccelerator(KeyStroke.getKeyStroke(
@@ -76,8 +132,8 @@ public class MenuFenetre extends JMenuBar{
 		arreterMenuItem = menu.getItem(1);
 		arreterMenuItem.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-			comm.stop();
-			rafraichirMenus();
+                stopConnection();
+                rafraichirMenus();
 		    }
 	    });
 		
@@ -94,12 +150,15 @@ public class MenuFenetre extends JMenuBar{
 		JMenu menu = creerMenu(MENU_FICHIER_TITRE, new String[] { MENU_FICHIER_QUITTER });
 		menu.getItem(0).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				comm.stop();
-			    try {
-						Thread.sleep(DELAI_QUITTER_MSEC);
-				} catch (InterruptedException e) {
-						e.printStackTrace();
-				}
+                try
+                {
+                    comm.stop();
+                    Thread.sleep(DELAI_QUITTER_MSEC);
+                }
+                catch (Exception ex)
+                {
+                    ex.printStackTrace();
+                }
 				System.exit(0);
 			}
 		});
@@ -139,9 +198,10 @@ public class MenuFenetre extends JMenuBar{
 	 */
 	private static JMenu creerMenu(String titleKey,String[] itemKeys) {
         JMenu menu = new JMenu(LangueConfig.getResource(titleKey));
-        for(int i=0; i < itemKeys.length; ++i) {
-           menu.add(new JMenuItem(LangueConfig.getResource(itemKeys[i])));
+        for (String itemKey : itemKeys) {
+            menu.add(new JMenuItem(LangueConfig.getResource(itemKey)));
         }
         return menu;
    }
+
 }

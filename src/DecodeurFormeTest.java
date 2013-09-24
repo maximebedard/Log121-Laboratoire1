@@ -62,5 +62,17 @@ public class DecodeurFormeTest {
 		assertEquals(1, d.getNoSeq());
 		assertEquals(TypeForme.LIGNE, d.getType());
 	}
+
+
+    @Test
+    public void decodeurFormeRectangleTest2()
+    {
+
+
+        DecodeurForme d = new DecodeurForme("57344 <RECTANGLE> 242 28 279 104 </RECTANGLE>");
+
+        assertEquals(57344, d.getNoSeq());
+        assertEquals(TypeForme.RECTANGLE, d.getType());
+    }
 	
 }
