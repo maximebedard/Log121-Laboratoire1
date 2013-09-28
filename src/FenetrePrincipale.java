@@ -20,6 +20,8 @@ import java.io.IOException;
 
 import javax.swing.*;
 
+import ca.etsmtl.log.util.IDLogger;
+
 /**
  * Cette classe représente la fenêtre principale de l'application 
  * @author Patrice Boucher
@@ -79,12 +81,13 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
         {
             System.out.println(evt.getNewValue());
             Forme f = CreateurFormes.creerForme((String) evt.getNewValue());
+            IDLogger.getInstance().logID(f.getNoSeq());
             fenetreFormes.ajouterForme(f);
             repaint();
         }
         if(evt.getPropertyName().equals("ERREUR"))
         {
-            Exception ex = (Exception) evt.getNewValue();
+            Exception ex = (IOException) evt.getNewValue();
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }

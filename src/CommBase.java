@@ -11,11 +11,7 @@ Historique des modifications
 *******************************************************/  
 
 import java.beans.PropertyChangeListener;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
 import javax.swing.*;
 
 /**
@@ -84,44 +80,52 @@ public class CommBase {
 	
 	/**
 	 * Créer le nécessaire pour la communication avec le serveur
+	 * @throws NullPointerException si listener == null
 	 */
 	protected void creerCommunication() {
-
-        // Crée un fil d'exécusion parallèle au fil courant,
+		
+		if(listener == null)
+			throw new NullPointerException("listener");
+		
+		// Crée un fil d'exécusion parallèle au fil courant,
 		threadComm = new SwingWorker<Object, Object>(){
 			@Override
-			protected Object doInBackground() throws InterruptedException {
+			protected Object doInBackground() throws InterruptedException, IOException {
 				System.out.println("Le fils d'execution parallele est lance");
-
-                try
-                {
-                    while(connexion.isConnected())
-                    {
-                        Thread.sleep(DELAI);
-
-                        String strForme = connexion.getForme();
-
-                        //La méthode suivante alerte l'observateur
-                        if(listener != null)
-                            firePropertyChange("FORME", null, strForme);
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    if(listener != null)
-                        firePropertyChange("ERREUR", null, ex);
-                }
-
-                isActif = false;
-                return null;
+		
+		        while(connexion.isConnected()) {
+		            Thread.sleep(DELAI);
+		            System.out.println(".");
+		
+		            String strForme = connexion.getForme();
+		            
+		            //La méthode suivante alerte l'observateur
+		            firePropertyChangeInternal("FORME", strForme);
+		        }
+		
+		        isActif = false;
+		        System.out.println("Le fils d'execution parallele est termine");
+		        return null;
 			}
-
+			
+			@Override
+			protected void done() {
+				try {
+					get();
+				} catch (Exception ex) {
+					firePropertyChangeInternal("ERROR", ex);
+				}
+			}
+			
+			private void firePropertyChangeInternal(String property, Object obj)
+			{
+				if(listener != null)
+					firePropertyChange(property, null, obj);
+			}
 		};
-		if(listener!=null)
-		   threadComm.addPropertyChangeListener(listener); // La méthode "propertyChange" de ApplicationFormes sera donc appelée lorsque le SwinkWorker invoquera la méthode "firePropertyChanger" 		
+		threadComm.addPropertyChangeListener(listener); // La méthode "propertyChange" de ApplicationFormes sera donc appelée lorsque le SwinkWorker invoquera la méthode "firePropertyChanger" 		
 		threadComm.execute(); // Lance le fil d'exécution parallèle.
-        isActif = true;
+		isActif = true;
     }
 
 

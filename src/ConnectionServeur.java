@@ -57,9 +57,12 @@ public class ConnectionServeur {
         if(!isConnected())
             return null;
 
-        inStream.readLine();
+        String s = inStream.readLine();
+        System.out.println(s);
         outStream.println("GET");
-        return inStream.readLine();
+        String s2 = inStream.readLine();
+        System.out.println(s2);
+        return s2;
     }
 
     /**
