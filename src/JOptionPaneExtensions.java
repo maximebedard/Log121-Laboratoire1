@@ -1,3 +1,15 @@
+/******************************************************
+Cours:  LOG121
+Projet: Laboratoire #1
+Nom du fichier: JOptionPaneExtensions.java
+Date créé: 2013-09-28
+*******************************************************
+Historique des modifications
+*******************************************************
+*@author Maxime Bédard
+2013-05-03 Version initiale
+*******************************************************/
+
 import javax.swing.*;
 import java.awt.*;
 

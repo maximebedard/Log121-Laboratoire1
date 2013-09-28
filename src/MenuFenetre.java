@@ -64,7 +64,7 @@ public class MenuFenetre extends JMenuBar{
     private void startConnection()
     {
         try {
-            String addr = JOptionPane.showInputDialog(this, "Quel est le nom d'hôte et le port du serveur de formes?");
+            String addr = JOptionPane.showInputDialog(this, "Quel est le nom d'hôte et le port du serveur de formes?", "localhost:10000");
 
             if(addr == null)
                 return;

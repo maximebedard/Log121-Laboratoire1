@@ -20,33 +20,33 @@ import java.awt.Graphics;
 public class Ovale extends Forme {
 
     /**
-     * Largeur de l'ovale
+     * Rayon horizontal de l'ovale
      */
-	private int largeur;
+	private int rayonH;
 
     /**
-     * Longueur de l'ovale
+     * Rayon vertical de l'ovale
      */
-	private int longueur;
+	private int rayonV;
 
     /**
      * Constructeur de la classe Ovale
      * @param noSeq
      * @param x
      * @param y
-     * @param largeur
-     * @param longueur
+     * @param rayonH
+     * @param rayonV
      */
-	public Ovale(int noSeq, int x, int y, int largeur, int longueur) {
+	public Ovale(int noSeq, int x, int y, int rayonH, int rayonV) {
 		super(noSeq, x, y);
         setCouleur(Color.GREEN);
-        this.largeur = largeur;
-        this.longueur = longueur;
+        this.rayonH = rayonH;
+        this.rayonV = rayonV;
 	}
 
 	@Override
 	protected void dessinerForme(Graphics g) {
-		g.fillOval(getX(), getY(), largeur, longueur);
+		g.fillOval(getX() + rayonH, getY() + rayonV, 2 * rayonH, 2 * rayonV);
 	}
 
 }

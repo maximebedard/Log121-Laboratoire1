@@ -1,4 +1,14 @@
-
+/******************************************************
+Cours:  LOG121
+Projet: laboratoire #1
+Nom du fichier: DecodeurForme.java
+Date créé: 2013-09-29
+*******************************************************
+Historique des modifications
+*******************************************************
+*@author Maxime Bédard
+2013-09-29 Version initiale
+*******************************************************/  
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

@@ -21,10 +21,11 @@ public class Carre extends Rectangle {
      * @param noSeq Numéro séquentiel obtenu lors de la connexion au serveur
      * @param x position en X du carré
      * @param y position en Y du carré
-     * @param longueurCote longueur des côtés d'un carré
+     * @param x2 position en X2 du carré
+     * @param y2 position en Y2 du carré
      */
-	public Carre(int noSeq, int x, int y, int longueurCote) {
-		super(noSeq, x,  y,  longueurCote, longueurCote);
+	public Carre(int noSeq, int x, int y, int x2, int y2) {
+		super(noSeq, x,  y,  x2, y2);
 		setCouleur(Color.CYAN);
 	}
 }

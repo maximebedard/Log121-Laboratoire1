@@ -1,3 +1,15 @@
+/******************************************************
+Cours:  LOG121
+Projet: laboratoire #1
+Nom du fichier: ConnectionServeur.java
+Date créé: 2013-09-29
+*******************************************************
+Historique des modifications
+*******************************************************
+*@author Maxime Bédard
+2013-09-29 Version initiale
+*******************************************************/  
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -57,12 +69,9 @@ public class ConnectionServeur {
         if(!isConnected())
             return null;
 
-        String s = inStream.readLine();
-        System.out.println(s);
+        inStream.readLine();
         outStream.println("GET");
-        String s2 = inStream.readLine();
-        System.out.println(s2);
-        return s2;
+        return inStream.readLine();
     }
 
     /**

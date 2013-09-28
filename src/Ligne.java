@@ -39,7 +39,7 @@ public class Ligne extends Forme {
      */
 	public Ligne(int noSeq, int x, int y, int x2, int y2) {
 		super(noSeq, x, y);
-        setCouleur(Color.YELLOW);
+        setCouleur(Color.RED);
 		this.x2 = x2;
 		this.y2 = y2;
 	}

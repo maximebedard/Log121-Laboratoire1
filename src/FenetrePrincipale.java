@@ -8,6 +8,8 @@ Historique des modifications
 *******************************************************
 *@author Patrice Boucher
 2013-05-03 Version initiale
+
+*@author Maxime Bedard
 *******************************************************/  
 
 import java.awt.BorderLayout;
@@ -36,7 +38,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
     /**
 	 * Constructeur
 	 */
-	public FenetrePrincipale(CommBase comm){
+	public FenetrePrincipale(final CommBase comm){
 
         MenuFenetre menu = new MenuFenetre(comm);
 		this.setLayout(new BorderLayout());
@@ -48,31 +50,21 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //... à réviser selon le comportement que vous désirez ...
 
         comm.setPropertyChangeListener(this);
-        this.addWindowListener(new FenetrePrincipaleClosingListener(comm));
+        //this.addWindowListener(new FenetrePrincipaleClosingListener(comm));
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    comm.stop();
+                } catch (IOException e1) {
+                    // suppress
+                }
+            }
+		});
 
 	}
 
-    /**
-     * Classe qui implémente l'action WindowClosing pour terminer la connexion de façon propre
-     */
-    private class FenetrePrincipaleClosingListener extends WindowAdapter
-    {
-        private CommBase comm;
 
-        public FenetrePrincipaleClosingListener(CommBase comm)
-        {
-            this.comm = comm;
-        }
-
-        @Override
-        public void windowClosing(WindowEvent e) {
-            try {
-                comm.stop();
-            } catch (IOException e1) {
-                // suppress
-            }
-        }
-    }
 
 
     @Override
@@ -85,10 +77,11 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
             fenetreFormes.ajouterForme(f);
             repaint();
         }
-        if(evt.getPropertyName().equals("ERREUR"))
+        else if(evt.getPropertyName().equals("ERREUR"))
         {
-            Exception ex = (IOException) evt.getNewValue();
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+            Exception ex = (Exception) evt.getNewValue();
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, String.format("Une erreur est survenue : %s", ex.getMessage()));
         }
     }
 }

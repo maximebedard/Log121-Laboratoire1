@@ -8,6 +8,9 @@ Historique des modifications
 *******************************************************
 *@author Patrice Boucher
 2013-05-03 Version initiale
+
+*@author Maxime Bédard
+2013-09-28 Ajout de la connexion au serveur
 *******************************************************/  
 
 import java.beans.PropertyChangeListener;
@@ -90,31 +93,31 @@ public class CommBase {
 		// Crée un fil d'exécusion parallèle au fil courant,
 		threadComm = new SwingWorker<Object, Object>(){
 			@Override
-			protected Object doInBackground() throws InterruptedException, IOException {
+			protected Object doInBackground() {
 				System.out.println("Le fils d'execution parallele est lance");
-		
-		        while(connexion.isConnected()) {
-		            Thread.sleep(DELAI);
-		            System.out.println(".");
-		
-		            String strForme = connexion.getForme();
-		            
-		            //La méthode suivante alerte l'observateur
-		            firePropertyChangeInternal("FORME", strForme);
-		        }
+				try {
+			        while(connexion.isConnected()) {
+			            Thread.sleep(DELAI);
+			
+			            String strForme = connexion.getForme();
+			            
+			            //La méthode suivante alerte l'observateur
+			            firePropertyChangeInternal("FORME", strForme);
+			        }
+				}
+				catch(IOException ex) {
+					firePropertyChangeInternal("ERREUR", ex);
+				}
+				catch (InterruptedException ex) {
+					// supress error
+				}
+				catch (Exception ex) {
+					ex.printStackTrace();
+				}
 		
 		        isActif = false;
 		        System.out.println("Le fils d'execution parallele est termine");
 		        return null;
-			}
-			
-			@Override
-			protected void done() {
-				try {
-					get();
-				} catch (Exception ex) {
-					firePropertyChangeInternal("ERROR", ex);
-				}
 			}
 			
 			private void firePropertyChangeInternal(String property, Object obj)

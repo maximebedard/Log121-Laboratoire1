@@ -1,3 +1,14 @@
+/******************************************************
+Cours:  LOG121
+Projet: laboratoire #1
+Nom du fichier: DecodeurFormeTest.java
+Date créé: 2013-09-29
+*******************************************************
+Historique des modifications
+*******************************************************
+*@author Maxime Bédard
+2013-09-29 Version initiale
+*******************************************************/  
 import static org.junit.Assert.*;
 
 import org.junit.Test;

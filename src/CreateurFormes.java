@@ -1,3 +1,14 @@
+/******************************************************
+Cours:  LOG121
+Projet: laboratoire #1
+Nom du fichier: CreateurFormes.java
+Date créé: 2013-09-29
+*******************************************************
+Historique des modifications
+*******************************************************
+*@author Maxime Bédard
+2013-09-29 Version initiale
+*******************************************************/  
 
 public final class CreateurFormes
 {
@@ -24,7 +35,7 @@ public final class CreateurFormes
 			switch(df.getType())
 			{
 			case CARRE:
-				f = new Carre(df.getNoSeq(), coords[0], coords[1], coords[2]);
+				f = new Carre(df.getNoSeq(), coords[0], coords[1], coords[2], coords[3]);
 				break;
 			case CERCLE:
 				f = new Cercle(df.getNoSeq(),coords[0], coords[1], coords[2]);
