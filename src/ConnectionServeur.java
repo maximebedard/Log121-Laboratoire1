@@ -14,7 +14,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
 import java.net.Socket;
+import java.net.URL;
+
+import com.sun.activation.registries.MailcapParseException;
 
 
 public class ConnectionServeur {
@@ -35,7 +40,8 @@ public class ConnectionServeur {
     private BufferedReader inStream = null;
 
     /**
-     * Connexion au serveur à partir d'une adresse au format [nom]:[port]
+     * Connexion au serveur à partir d'une adresse au format nom:[port] ou le port
+     * par défaut est égal à 10000
      * @param addr adresse du serveur
      * @throws IOException Exception lancé lors des erreurs de connexion
      */
@@ -43,9 +49,29 @@ public class ConnectionServeur {
         if(isConnected())
             disconnect();
 
-        String url = addr.substring(0, addr.indexOf(":"));
-        int port = Integer.parseInt(addr.substring(addr.indexOf(":") + 1));
-        socket = new Socket(url, port);
+        if(addr == null || (addr != null && addr.equals("")))
+        	throw new MalformedURLException("L'adresse est vide");
+        
+        String[] addrParts = addr.split(":");
+        
+        int port = 10000;
+        String hostname = addrParts[0];
+        
+        if(addrParts.length == 0 || addrParts.length > 2)
+        	throw new MalformedURLException("L'adresse contient plus d'un ':' pour spécifier le port.");
+        
+        if(addrParts.length > 1){
+        	try {
+            	port = Integer.parseInt(addrParts[1]);
+			} catch (NumberFormatException ex) {
+				throw new MalformedURLException("Le numéro de port n'est pas un entier");
+			}
+        }
+        
+        System.out.println("Hostname : " + hostname);
+        System.out.println("Port : " + port);
+        	
+        socket = new Socket(hostname, port);
         outStream = new PrintWriter(socket.getOutputStream(), true);
         inStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 

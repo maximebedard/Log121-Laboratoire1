@@ -13,10 +13,12 @@ Historique des modifications
 import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 
 /**
@@ -61,8 +63,9 @@ public class MenuFenetre extends JMenuBar{
      */
     private void startConnection()
     {
+    	String addr = "";
         try {
-            String addr = JOptionPane.showInputDialog(this, "Quel est le nom d'hôte et le port du serveur de formes?", "localhost:10000");
+            addr = JOptionPane.showInputDialog(this, "Quel est le nom d'hôte et le port du serveur de formes?", "localhost:10000");
 
             if(addr == null)
                 return;
@@ -70,11 +73,15 @@ public class MenuFenetre extends JMenuBar{
             comm.start(addr);
         }
         catch (UnknownHostException ex){
-            JOptionPaneExtensions.showErrorMessage(this, "Mauvaise spécification de nom de la part de l'usager (erreur DNS)");
+            JOptionPaneExtensions.showErrorMessage(this, "Le machine distance ne peut pas être résolue (erreur DNS).");
+            startConnection();
+        }
+        catch(MalformedURLException ex){
+        	JOptionPaneExtensions.showErrorMessage(this, String.format("L'url entré '%s' est invalide. %s", addr, ex.getMessage()));
             startConnection();
         }
         catch (IOException ex){
-            JOptionPaneExtensions.showErrorMessage(this, "Tentative de connexion à un serveur qui n'est pas démarré.");
+            JOptionPaneExtensions.showErrorMessage(this, "La connexion au serveur à échoué, est-ce que celui-ci est bien démarré?");
             startConnection();
         }
         catch (Exception ex){
