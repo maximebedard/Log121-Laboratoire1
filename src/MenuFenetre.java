@@ -16,8 +16,6 @@ import javax.swing.event.MenuListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
@@ -120,7 +118,8 @@ public class MenuFenetre extends JMenuBar{
 
 		demarrerMenuItem = menu.getItem(0);
 		demarrerMenuItem.addActionListener(new ActionListener(){
-		  public void actionPerformed(ActionEvent arg0) {
+		  @Override
+		public void actionPerformed(ActionEvent arg0) {
               startConnection();
               rafraichirMenus();
 		  }
@@ -131,6 +130,7 @@ public class MenuFenetre extends JMenuBar{
 
 		arreterMenuItem = menu.getItem(1);
 		arreterMenuItem.addActionListener(new ActionListener(){
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
                 stopConnection();
                 rafraichirMenus();
@@ -149,6 +149,7 @@ public class MenuFenetre extends JMenuBar{
 	protected void addMenuFichier() {
 		JMenu menu = creerMenu(MENU_FICHIER_TITRE, new String[] { MENU_FICHIER_QUITTER });
 		menu.getItem(0).addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
                 try
                 {
@@ -174,6 +175,7 @@ public class MenuFenetre extends JMenuBar{
 	private void addMenuAide() {
 		JMenu menu = creerMenu(MENU_AIDE_TITRE, new String[] { MENU_AIDE_PROPOS });
 		menu.getItem(0).addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane.showMessageDialog(null,  LangueConfig.getResource(MESSAGE_DIALOGUE_A_PROPOS), 
 						LangueConfig.getResource(MENU_AIDE_PROPOS), JOptionPane.INFORMATION_MESSAGE);

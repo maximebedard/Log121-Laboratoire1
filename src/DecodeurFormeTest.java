@@ -13,8 +13,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.sun.media.sound.InvalidFormatException;
-
 
 public class DecodeurFormeTest {
 

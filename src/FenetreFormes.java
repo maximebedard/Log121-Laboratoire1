@@ -13,9 +13,6 @@ Historique des modifications
 import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.IOException;
 
 /**
  * Cette fenêtre gère l'affichage des formes 
